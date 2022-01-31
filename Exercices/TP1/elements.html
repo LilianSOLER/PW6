@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Un peu de style en CSS (niv. 1)</title>
+  <meta charset="UTF-8">
+  <meta name="author" content="SOLER Lilian">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0">
+  <link rel="stylesheet" href="elements.css">
+</head>
+<body>
+  <h1 id='titre_exercice'>Un peu de style en CSS (niv. 1)</h1>
+  <hr>
+  <div class="container">
+    <div class="bloc">
+      <h1>Titres de section</h1>
+      <h2>Titre niveau deux</h2>
+      <h3>Titre niveau trois</h3>
+      <h4>Titre niveau quatre</h4>
+      <h5>Titre niveau cinq</h5>
+      <h6>Titre niveau six</h6>
+    </div>
+    <div class="bloc">
+      <h1>Listes</h1>
+
+      <p>Les principaux serveurs web</p>
+      <ul>
+        <li>Apache Httpd</li>
+        <li>Microsoft IIS</li>
+        <li>Nginx</li>
+        <li>Lighttpd</li>
+      </ul>
+
+      <p>Les principales distributions Linux</p>
+      <ol>
+        <li>Debian GNU/Linux</li>
+        <li>Ubuntu</li>
+        <li>RedHat Enterprise Linux</li>
+        <li>CentOS</li>
+        <li>Slackware</li>
+      </ol>
+    </div>
+
+    <div class="bloc">
+      <h1>Tableaux (tables) html</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Saison</th>
+            <th>Début</th>
+            <th>Fin</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Printemps</th>
+            <td>21 mars</td>
+            <td>21 juin</td>
+          </tr>
+          <tr>
+            <th>Été</th>
+            <td>21 juin</td>
+            <td>22 septembre</td>
+          </tr>
+          <tr>
+            <th>Automne</th>
+            <td>22 septembre</td>
+            <td>21 décembre</td>
+          </tr>
+          <tr>
+            <th>Hiver</th>
+            <td>21 décembre</td>
+            <td>21 mars</td>
+          </tr>
+        </tbody>
+      </table>
+      <caption>Légende totalement superfétatoire</caption>
+    </div>
+  </div>
+  <h1>Paragraphes</h1>
+  <p>
+  Le contenu textuel peut être regroupé en paragraphes.
+
+  En HTML,    les     espaces sont    habituellement   non significatifs. 
+
+  En dehors des feuilles de style, une mise en forme légère est possible : <b>important</b>, <i>italique</i> (ou équivalent), <q>citation d'un autre texte</q>.
+  </p>
+
+  L'élément <i>pre</i> permet d'afficher un bloc de texte dans un format particulier :
+  <pre>
+  function testFunction( strText ){ 
+        alert (strText)
+  }
+  </pre>
+
+  <!-- cette ligne de commentaire n'est pas affichée par le navigateur -->
+
+  <h1>Liens et images</h1>
+  Un lien vers la <a href="http://www.w3.org/TR/html5/">référence HTML5</a> sur le site du W3C. <br />
+  Et son logo :
+  <img src="https://mdn.mozillademos.org/files/3563/HTML5_Logo_128.png" alt="Logo du site W3C"/><br >
+  Et les deux combinés :<br />
+  <a href="http://www.w3.org/TR/html5/">
+  <img src="https://mdn.mozillademos.org/files/3563/HTML5_Logo_128.png" alt="Logo du site W3C" />
+  </a>
+</body>
+</html>
+
