@@ -24,3 +24,5 @@ var_dump($u);
 
 # Maintenant, remplacez les appels à var_dump() par print_r()
 
+print_r($t);
+print_r($u);
