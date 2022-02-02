@@ -40,7 +40,15 @@ $YEAR = date('Y');
 $STR_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 $generic_array_month = [];
 $month = 1;
+if(isset($_GET['month'])){
+  $month = $_GET['month'];
+}
+
 $ncols = 7;
+if(isset($_GET['format'])){
+  $ncols = $_GET['format'];
+}
+
 
 /*if(!isset($_SESSION["MONTHS"])){
   init_month($YEAR);
@@ -133,5 +141,4 @@ addEvent(24, "DS WEB 2", 7);
 	<hr>
   <?php echo array_HTML_Table($generic_array_month, false, 7); ?>
 </body>
-
 </html>
