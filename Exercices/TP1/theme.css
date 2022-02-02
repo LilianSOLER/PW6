@@ -72,9 +72,11 @@ table,
 th,
 td {
   border: 1px solid black;
+  width: max-content;
 }
 
 th,
 td {
   padding: 5px;
+  text-align: center;
 }
