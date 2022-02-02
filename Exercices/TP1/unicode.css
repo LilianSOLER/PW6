@@ -1,0 +1,15 @@
+.container_unicode{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  /*overflow: auto;*/
+}
+
+.block_unicode{
+  border: 1px solid black;
+  width: 70px;
+  height: 70px;
+  padding: 2px 5px;
+}
