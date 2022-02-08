@@ -18,6 +18,8 @@ Sujet choisi :
 * cat file
 
 #### 1.Comptage:
+* cat data/borneswifi_EPSG4326_20171004.csv | wc -l
+
 * cat borneswifi_EPSG4326_20171004_utf8.csv | cut -d, -f2 | uniq -c | sort -r
 
 #### 2.Points multiples:
