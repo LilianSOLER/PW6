@@ -1,6 +1,7 @@
 <?php
 $FILE = $argv[1];
 $DIST_CLOSE = (float) $argv[2];
+$NUMBER_POINTS = (int) $argv[3];
 
 function csv_to_array($file){
   $res = [];
@@ -26,7 +27,8 @@ function distance($p1, $p2){
   return $d;
 }
 
-function distance_point_acces($points, $point, $mode){
+
+function distance_point_acces($points, $point, $mode, $number = -1){
   global $DIST_CLOSE;
   $res = [];
   foreach ($points as $p) {
@@ -37,7 +39,16 @@ function distance_point_acces($points, $point, $mode){
         "distance" => $dist,
       ];
     }
-    
+  }
+
+  if($number != -1){
+    $cols1 = array_column($res, 'distance');
+    $cols2 = array_column($res, 'name');
+    array_multisort($cols1, $cols2, $res);
+
+    $len = count($res);
+    if($len < $number){$number = $len;}
+    $res = array_slice($res, 0, $number);
   }
   return $res;
 }
@@ -56,4 +67,4 @@ echo "Point d'accès 1 choisi : " . $point1["name"] . " (" . $point1["lon"] . ",
 
 //print_r(distance_point_acces($array, $point1, "all"));
 //distance_point_acces($array, $point1, "closest");
-print_r(distance_point_acces($array, $point1, "closest"));
+print_r(distance_point_acces($array, $point1, "closest", $NUMBER_POINTS));
