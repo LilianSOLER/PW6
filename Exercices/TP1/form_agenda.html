@@ -15,7 +15,11 @@
   <form action="agenda.php" method="get">
     <p>
       <label for="month">Mois : </label>
-      <input type="number" name="month" id="month" min="1" max="12" step="1" required>
+      <input type="number" name="month" id="month" min="1" max="12" step="1">
+    </p>
+    <p>
+      <label for="year">Année : </label>
+      <input type="number" name="year" id="year" min="1900" max="2200" step="1">
     </p>
     <p>
       <label for="format">Format : </label>
@@ -27,7 +31,7 @@
     </p>
     <input type="submit" value="Afficher">
   </form>
-
+  <p><span title="message d'aide">support</span></p>
   <form action="agenda.php" method="get">
     <p>
       <label for="ndays">Jour : </label>

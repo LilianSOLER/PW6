@@ -36,7 +36,6 @@ function array_HTML_Table($data, $name_cols,$width){
 }
 
 $MONTHS = [];
-$YEAR = date('Y');
 $STR_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 $generic_array_month = [];
 $month = 1;
@@ -47,6 +46,11 @@ if(isset($_GET['month'])){
 $ncols = 7;
 if(isset($_GET['format'])){
   $ncols = $_GET['format'];
+}
+
+$YEAR = date('Y');
+if(isset($_GET['year'])){
+  $YEAR = $_GET['year'];
 }
 
 
@@ -139,6 +143,6 @@ addEvent(24, "DS WEB 2", 7);
 <body>
 	<h1>Calendrier - agenda web (niv. 3)</h1>
 	<hr>
-  <?php echo array_HTML_Table($generic_array_month, false, 7); ?>
+  <?php echo array_HTML_Table($generic_array_month, false, $ncols); ?>
 </body>
 </html>
