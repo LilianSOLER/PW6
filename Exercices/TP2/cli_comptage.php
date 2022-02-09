@@ -3,6 +3,8 @@ $FILE = $argv[1];
 $DIST_CLOSE = (float) $argv[2];
 $NUMBER_POINTS = (int) $argv[3];
 
+require_once '../../Helpers/tp2-helpers.php'; //SmartCurl
+
 function csv_to_array($file){
   $res = [];
   $lines = file($file, FILE_IGNORE_NEW_LINES);
@@ -59,6 +61,18 @@ function coordinate_to_adress($point){
 }
 
 
+function coordinate_to_adress_curl($point){
+  $url = "https://api-adresse.data.gouv.fr/reverse/?lon=" . $point['lon'] . "&lat=" . $point['lat'];
+  $verb = 2;
+  $rep = smartcurl($url, $verb);
+  $rep = json_decode($rep);
+  if(!isset($rep->features[0]->properties->label)){
+    return -1;
+  }
+  return $rep->features[0]->properties->label;
+}
+
+
 $array = csv_to_array($FILE);
 print_r($array);
 echo count($array) . " points d'accès \n";
@@ -74,4 +88,5 @@ echo "Point d'accès 1 choisi : " . $point1["name"] . " (" . $point1["lon"] . ",
 //print_r(distance_point_acces($array, $point1, "all"));
 //distance_point_acces($array, $point1, "closest");
 //print_r(distance_point_acces($array, $point1, "closest", $NUMBER_POINTS));
-//coordinate_to_adress($point1) . "\n";
+print_r(coordinate_to_adress($point1)); echo "\n";
+print_r(coordinate_to_adress_curl($point1)); echo "\n";
