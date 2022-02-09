@@ -1,26 +1,26 @@
 <?php
 
-// /**
-//  * @param float $lon
-//  * @param float $lat
-//  * @return array ['lon'=>float, 'lat'=>float]
-//  */
-// function geopoint($lon, $lat) {
-//   return ['lon'=>$lon, 'lat'=>$lat];
-// }
+/**
+ * @param float $lon
+ * @param float $lat
+ * @return array ['lon'=>float, 'lat'=>float]
+ */
+function geopoint($lon, $lat) {
+  return ['lon'=>$lon, 'lat'=>$lat];
+}
 
-// /* 
-//    @param $p array('lon'=>int, 'lat'=>int)
-//    @param $q array('lon'=>int, 'lat'=>int)
-//    @return int distance (approx.) in meters
-// */
-// function distance ($p, $q) {
-//   $scale = 10000000 / 90; // longueur d'un degré le long d'un méridien
-//   $a = ((float)$p['lon'] - (float)$q['lon']);
-//   $b = (cos((float)$p['lat']/180.0*M_PI) * ((float)$p['lat'] - (float)$q['lat']));
-//   $res = $scale * sqrt( $a**2 + $b**2 );
-//   return (float)sprintf("%5.1f", $res);
-// }
+/* 
+   @param $p array('lon'=>int, 'lat'=>int)
+   @param $q array('lon'=>int, 'lat'=>int)
+   @return int distance (approx.) in meters
+*/
+function distance ($p, $q) {
+  $scale = 10000000 / 90; // longueur d'un degré le long d'un méridien
+  $a = ((float)$p['lon'] - (float)$q['lon']);
+  $b = (cos((float)$p['lat']/180.0*M_PI) * ((float)$p['lat'] - (float)$q['lat']));
+  $res = $scale * sqrt( $a**2 + $b**2 );
+  return (float)sprintf("%5.1f", $res);
+}
 
 /**
  * curl wrapper
