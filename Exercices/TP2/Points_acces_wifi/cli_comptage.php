@@ -9,4 +9,4 @@ $array = csv_to_array($FILE);
 //test_distance($array, $FILE);
 //test_distance_array($array, $FILE,$NUMBER_POINTS, $DIST_CLOSE);
 //test_basic_api($array, $FILE);
-test_curl_api_with_modification_csv($array, $FILE);
+//test_curl_api_with_modification_csv($array, $FILE);

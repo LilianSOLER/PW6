@@ -64,7 +64,7 @@ fieldset {
 table {
   border-collapse: collapse;
   margin-bottom: 20px;
-  table-layout: autor;
+  table-layout: auto;
   width: 100%;
 }
 
