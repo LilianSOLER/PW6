@@ -31,6 +31,7 @@ function distance_point_acces($points, $point, $mode, &$DIST_CLOSE, $number = -1
       $res[] = [
         "name" => $p["name"],
         "distance" => $dist,
+        "coord" => ["lon" => $p['lon'], "lat" => $p['lat']],        
       ];
     }
   }
