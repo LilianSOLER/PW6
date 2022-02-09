@@ -8,23 +8,18 @@ function csv_to_array($file){
   $lines = file($file, FILE_IGNORE_NEW_LINES);
 	foreach ($lines as $line) {
 		$l = explode(',', trim($line));
-		$l = ["name" => $l[0], "adr" => $l[1], "lon" => (float) $l[2], "lat" => (float) $l[3]];
+    $l = ["name" => $l[0], "adr" => $l[1], "lon" => (float) $l[2], "lat" => (float) $l[3]];
     $res[] = $l;
   }
 	return $res;
 }
 
-function distance($p1, $p2){
-  $coeffR = pi()/180;
-  $lon1 = $p1["lon"];
-  $lat1 = $p1["lat"];
-  $lon2 = $p2["lon"];
-  $lat2 = $p2["lat"];
-  
-  $x = ($lon2 - $lon1) * cos(($lat1 + $lat2)/2 * $coeffR);
-  $y = $lat2 - $lat1;
-  $d = sqrt($x*$x + $y*$y) * 6371;
-  return $d;
+function distance ($p, $q) {
+  $scale = 10000000 / 90; // longueur d'un degré le long d'un méridien
+  $a = ((float)$p['lon'] - (float)$q['lon']);
+  $b = (cos((float)$p['lat']/180.0*M_PI) * ((float)$p['lat'] - (float)$q['lat']));
+  $res = $scale * sqrt( $a**2 + $b**2 );
+  return (float)sprintf("%5.1f", $res);
 }
 
 
@@ -53,8 +48,19 @@ function distance_point_acces($points, $point, $mode, $number = -1){
   return $res;
 }
 
+function coordinate_to_adress($point){
+  $req = "https://api-adresse.data.gouv.fr/reverse/?lon=" . $point['lon'] . "&lat=" . $point['lat'];
+  $rep = file_get_contents($req);
+  $rep = json_decode($rep);
+  if(!isset($rep->features[0]->properties->label)){
+    return -1;
+  }
+  return $rep->features[0]->properties->label;
+}
+
+
 $array = csv_to_array($FILE);
-//print_r($array);
+print_r($array);
 echo count($array) . " points d'accès \n";
 
 $point1 = $array[rand(0, count($array)-1)];
@@ -67,4 +73,5 @@ echo "Point d'accès 1 choisi : " . $point1["name"] . " (" . $point1["lon"] . ",
 
 //print_r(distance_point_acces($array, $point1, "all"));
 //distance_point_acces($array, $point1, "closest");
-print_r(distance_point_acces($array, $point1, "closest", $NUMBER_POINTS));
+//print_r(distance_point_acces($array, $point1, "closest", $NUMBER_POINTS));
+//coordinate_to_adress($point1) . "\n";
