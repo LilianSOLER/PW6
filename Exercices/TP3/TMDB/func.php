@@ -37,22 +37,24 @@ function smartcurl($url) {
   return [$raw_content, $info];
 }
 
-$tests_tmdb_get = [
-  ["url_component" => '', "params" => NULL],
-  ["url_component" => 'movie/popular', "params" => ['language' => 'fr']],
-  ["url_component" => 'movie/popular', "params" => ['language' => 'en']]
-];
+function find_details($id, $params = null) {
+  $movie = tmdb_get('movie/' . $id, $params);
 
-function test_tmdb_get($tests) {
-  echo "Testing tmdb_get ...\n";
-
-  foreach($tests as $test){
-    print_r($test);
-    $content = tmdb_get($test['url_component'], $test['params']);
-    echo "URL: $test->url_component\n";
-    echo "Content: ";
-    print_r($content);
+  if(isset($movie->success)){
+    echo "Details introuvables pour l'id $id\n";
+    return -1;
   }
 
-  echo "Done.\n\n";
+  $movie_details = [
+    'title' => $movie->title,
+    'original_title' => $movie->original_title,
+    'tagline' => -1,
+    'overview' => $movie->overview,
+    'link' => $movie->homepage,
+  ];
+
+  if(isset($movie->tagline)){
+    $movie_details['tagline'] = $movie->tagline;
+  }
+  return $movie_details;
 }
