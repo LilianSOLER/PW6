@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once ('config.php');
 
 $api_prefix = 'http://api.themoviedb.org/3/';  //3rd API version
 
@@ -17,7 +17,6 @@ function tmdb_get($url_component, $params=null) {
 
   return json_decode($content);
 }
-
 
 /**
 * curl wrapper
@@ -38,6 +37,7 @@ function smartcurl($url) {
 }
 
 function find_details($id, $params = null) {
+  global $BASE_URL, $POSTER_SIZES, $POSTER_SIZE_INDEX;
   $movie = tmdb_get('movie/' . $id, $params);
 
   if(isset($movie->success)){
@@ -51,7 +51,7 @@ function find_details($id, $params = null) {
     'tagline' => -1,
     'overview' => $movie->overview,
     'link' => $movie->homepage,
-    'poster' => $movie->poster_path
+    'poster' => $BASE_URL . $POSTER_SIZES[$POSTER_SIZE_INDEX] . $movie->poster_path
   ];
 
   if(isset($movie->tagline)){

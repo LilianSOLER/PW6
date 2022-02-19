@@ -1,5 +1,5 @@
 <?php
-require_once "func.php";
+require_once ('func.php');
 
 $tests_tmdb_get = [
   ["url_component" => '', "params" => NULL],
@@ -39,12 +39,11 @@ function test_find_details($tests) {
 
     echo "ID: $id\n";
     $movie_details = find_details($id, $param);
-    if($movies_details == -1){
+    if($movie_details == -1){
       echo "Details introuvables pour l'id $id\n";
     }else{
       display_details($movie_details);
-    }
-    
+    }  
   }
 
   echo "Done.\n\n";
