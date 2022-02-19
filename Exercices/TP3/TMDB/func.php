@@ -58,3 +58,20 @@ function find_details($id, $params = null) {
   }
   return $movie_details;
 }
+
+function find_details_n_lang($id, $n) {
+  global $LANGUAGES;
+  $movie_details = [];
+
+  if($n == 0){
+    return $movie_details;
+  }
+  if($n > count($LANGUAGES)){
+    $n = count($LANGUAGES);
+  }
+
+  for($i = 0; $i < $n; $i++){
+    $movie_details[] = find_details($id, ['language' => $LANGUAGES[$i]]);
+  }
+  return $movie_details;
+}
