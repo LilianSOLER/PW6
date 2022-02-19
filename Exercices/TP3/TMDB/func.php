@@ -37,18 +37,22 @@ function smartcurl($url) {
   return [$raw_content, $info];
 }
 
-function test_tmdb_get($url_component, $params=null) {
-  echo "Testing tmdb_get($url_component) ...\n";
+$tests_tmdb_get = [
+  ["url_component" => '', "params" => NULL],
+  ["url_component" => 'movie/popular', "params" => ['language' => 'fr']],
+  ["url_component" => 'movie/popular', "params" => ['language' => 'en']]
+];
 
-  $content = tmdb_get($url_component);
-  echo "URL: $url_component\n";
-  echo "Content: ";
-  print_r($content);
+function test_tmdb_get($tests) {
+  echo "Testing tmdb_get ...\n";
 
-  $content = tmdb_get($url_component, $params);
-  echo "URL: $url_component \n";
-  echo "Content: ";
-  print_r($content);
+  foreach($tests as $test){
+    print_r($test);
+    $content = tmdb_get($test['url_component'], $test['params']);
+    echo "URL: $test->url_component\n";
+    echo "Content: ";
+    print_r($content);
+  }
 
-  echo "Done.\n";
+  echo "Done.\n\n";
 }
