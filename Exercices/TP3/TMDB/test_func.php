@@ -39,21 +39,27 @@ function test_find_details($tests) {
 
     echo "ID: $id\n";
     $movie_details = find_details($id, $param);
-    if($movie_details == -1){
-      continue;
+    if($movies_details == -1){
+      echo "Details introuvables pour l'id $id\n";
+    }else{
+      display_details($movie_details);
     }
-    echo "Details: ";
-    echo "Title: " . $movie_details['title'] . "\n";
-    echo "Original title: " . $movie_details['original_title'] . "\n";
-    if($movie_details['tagline'] != -1){
-      echo "Tagline: " . $movie_details['tagline'] . "\n";
-    }
-    echo "Overview: " . $movie_details['overview'] . "\n";
-    echo "Link: " . $movie_details['link'] . "\n";
-    echo "\n\n";
+    
   }
 
   echo "Done.\n\n";
+}
+
+function display_details($details){
+  echo "Title: " . $details['title'] . "\n";
+  echo "Original title: " . $details['original_title'] . "\n";
+  if($details['tagline'] != -1){
+    echo "Tagline: " . $details['tagline'] . "\n";
+  }
+  echo "Overview: " . $details['overview'] . "\n";
+  echo "Link: " . $details['link'] . "\n";
+  echo "Poster: " . $details['poster'] . "\n";
+  echo "\n\n";
 }
 
 function test_find_details_n_lang($tests, $n = 3){
@@ -69,15 +75,7 @@ function test_find_details_n_lang($tests, $n = 3){
       echo "Details introuvables pour l'id $id\n";
     }else{
       foreach($movies_details as $movie_details){
-        echo "Details: ";
-        echo "Title: " . $movie_details['title'] . "\n";
-        echo "Original title: " . $movie_details['original_title'] . "\n";
-        if($movie_details['tagline'] != -1){
-          echo "Tagline: " . $movie_details['tagline'] . "\n";
-        }
-        echo "Overview: " . $movie_details['overview'] . "\n";
-        echo "Link: " . $movie_details['link'] . "\n";
-        echo "\n\n";
+        display_details($movie_details);
       }
     }  
   }

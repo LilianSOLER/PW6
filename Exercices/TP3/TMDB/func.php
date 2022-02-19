@@ -51,6 +51,7 @@ function find_details($id, $params = null) {
     'tagline' => -1,
     'overview' => $movie->overview,
     'link' => $movie->homepage,
+    'poster' => $movie->poster_path
   ];
 
   if(isset($movie->tagline)){
