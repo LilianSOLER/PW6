@@ -8,7 +8,7 @@ $POSTER_SIZE_INDEX = rand(0, count($POSTER_SIZES) - 1);
 
 
 // TESTS("tmdb_get");
-// TESTS("find_details");
+TESTS("find_details");
 // TESTS("find_details_n_lang");
 // print_r($CONFIGURATION_INFO);
 // TESTS("sort_by");
@@ -20,3 +20,4 @@ $POSTER_SIZE_INDEX = rand(0, count($POSTER_SIZES) - 1);
 // TESTS("get_collection_actors");
 //echo "Il y a " . count(get_collection_actors(get_collection_id("Lord of the Rings"))) . " acteurs dans The Lord of the Rings\n";
 //echo "Il y a " . count(get_collection_actors(get_collection_id("Hobbit"))) . " acteurs dans The Hobbit\n";
+//print_r(find_details_with_query("Brad Pitt", 10));

@@ -49,14 +49,20 @@ function find_details($id, $params = null) {
     'id' => $id,
     'title' => $movie->title,
     'original_title' => $movie->original_title,
-    'tagline' => -1,
-    'overview' => $movie->overview,
-    'link' => $movie->homepage,
     'poster' => $BASE_URL . $POSTER_SIZES[$POSTER_SIZE_INDEX] . $movie->poster_path
   ];
-
-  if(isset($movie->tagline)){
+  if(isset($movie->overview) && $movie->overview != ''){
+    $movie_details['overview'] = $movie->overview;
+  }
+  if(isset($movie->homepage) && $movie->homepage != ''){
+    $movie_details['link'] = $movie->homepage;
+  }
+  if(isset($movie->tagline) && $movie->tagline != ''){
     $movie_details['tagline'] = $movie->tagline;
+  }
+  $movie = tmdb_get('movie/' . $id . '/videos', $params);
+  if(isset($movie->results[0])){
+    $movie_details['trailer'] = "https://www.youtube.com/watch?v=" . $movie->results[0]->key;
   }
   return $movie_details;
 }
@@ -187,3 +193,4 @@ function get_collection_actors($id_collection){
   }
   return $actors;
 }
+

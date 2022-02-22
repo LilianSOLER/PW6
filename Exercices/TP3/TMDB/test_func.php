@@ -23,9 +23,9 @@ function test_tmdb_get($tests) {
 
 $LANGUAGES = ["fr", "en", "it", "de", "es", "pt", "ja", "ko", "zh"];
 $tests_find_details = NULL;
-for($i = 20; $i < 30; $i++){
+for($i = 0; $i < 10; $i++){
   $tests_find_details[] = [
-    "id" => rand(1, 100), 
+    "id" => rand(1, 1000), 
     "params" => ['language' => $LANGUAGES[rand(0, count($LANGUAGES) - 1)]]
   ];
 }
@@ -39,11 +39,10 @@ function test_find_details($tests) {
 
     echo "ID: $id\n";
     $movie_details = find_details($id, $param);
-    if($movie_details == -1){
-      echo "Details introuvables pour l'id $id\n";
-    }else{
+    if($movie_details != -1){
       display_details($movie_details);
-    }  
+    } 
+    echo "\n";
   }
 
   echo "Done.\n\n";
@@ -53,12 +52,19 @@ function display_details($details){
   if(!isset($details['title'])){return ;}
   echo "Title: " . $details['title'] . "\n";
   echo "Original title: " . $details['original_title'] . "\n";
-  if($details['tagline'] != -1){
+  if(isset($details['tagline'])){
     echo "Tagline: " . $details['tagline'] . "\n";
   }
-  echo "Overview: " . $details['overview'] . "\n";
-  echo "Link: " . $details['link'] . "\n";
+  if(isset($details['overview'])){
+    echo "Overview: " . $details['overview'] . "\n";
+  }
+  if(isset($details['link'])){
+    echo "Link: " . $details['link'] . "\n";
+  }
   echo "Poster: " . $details['poster'] . "\n";
+  if(isset($details['trailer'])){
+    echo "Trailer: " . $details['trailer'] . "\n";
+  }
   echo "\n\n";
 }
 
@@ -75,7 +81,8 @@ function test_find_details_n_lang($tests, $n = 3){
       foreach($movies_details as $movie_details){
         display_details($movie_details);
       }
-    }  
+    }
+    echo "\n";
   }
 
   echo "Done.\n\n";
@@ -106,9 +113,7 @@ function test_sort_by($tests){
     echo "Query: $query\n";
     echo "Critère: $criteria\n";
     $movies_sorted = sort_movies_by($movies, $criteria);
-    if($movies_sorted == -1){
-      echo "Critère $criteria introuvable\n";
-    }else{
+    if($movies_sorted != -1){
       foreach($movies_sorted as $movie){
         echo $movie->$criteria . "\n";
       }
@@ -131,9 +136,7 @@ function test_find_details_with_query($tests){
     echo "Query: $query\n";
     echo "Nombre de résultats: $nmovies\n\n";
     $movies_details = find_details_with_query($query, $nmovies, $param);
-    if($movies_details == -1){
-      echo "Aucun film trouvé pour la recherche $query\n";
-    }else{
+    if($movies_details != -1){
       foreach($movies_details as $movie_details){
         display_details($movie_details);
       }
