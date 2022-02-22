@@ -167,6 +167,96 @@ function test_find_details_with_query_n_lang($tests){
   echo "Done.\n\n";
 }
 
+$COLLECTIONS_NAME = ["Avengers", "Star Wars", "Harry Potter", "Lord of The Rings", "The Godfather", "The Shawshank Redemption", "The Godfather", "Batman", "Matrix", "Terminator", "fdsqihxcgkl", "uhefSIDUQHLKUH", "IGUEZZFQISDGKI"];
+$test_collections = NULL;
+for($i = 0; $i < 10; $i++){
+  $name = $COLLECTIONS_NAME[rand(0, count($COLLECTIONS_NAME) - 1)];
+  $test_collections[] = [
+    "name" => $name,
+  ];
+}
+
+function test_get_collection_id($tests){
+  echo "Testing get_collection_id() ...\n\n";
+
+  foreach($tests as $test){
+    $collection_name = $test['name'];
+    $collection_id = get_collection_id($collection_name);
+    if($collection_id != -1){
+      echo "Collection name: $collection_name\n";
+      echo "Collection id: $collection_id\n";
+    }
+    echo "\n\n";
+  }
+  echo "Done.\n\n";
+}
+
+function test_get_movie_from_collection($tests){
+  echo "Testing get_movie_from_collection() ...\n\n";
+
+  foreach($tests as $test){
+    $collection_name = $test['name'];
+    $collection_id = get_collection_id($collection_name);
+    if($collection_id != -1){
+      echo "Collection name: $collection_name\n";
+      echo "Collection id: $collection_id\n";
+      $movies = get_movie_from_collection($collection_id);
+      if($movies == -1){
+        echo "Collection $collection_name introuvable\n";
+      }else{
+        foreach($movies as $movie){
+          echo $movie->title . "\n";
+        }
+      }
+    }
+    echo "\n\n";
+  }
+  echo "Done.\n\n";
+}
+
+$n_tests_get_actors = rand(3, 10);
+
+function test_get_actors($n_tests){
+  echo "Testing get_actors() ...\n\n";
+
+  for($i = 0; $i < $n_tests; $i++){
+    $id = rand(0, 1000);
+    $actors = get_actors($id);
+    if($actors != -1){
+      echo "Movie id: $id\n";
+      echo "Nombre d'acteurs: " . count($actors) . "\n";
+      foreach($actors as $actor){
+        echo $actor->name . "\n";
+      }
+    }
+    echo "\n\n";
+  }
+  echo "Done.\n\n";
+}
+
+function test_get_collection_actors($tests){
+  echo "Testing collection_actors() ...\n\n";
+
+  foreach($tests as $test){
+    $collection_name = $test['name'];
+    $collection_id = get_collection_id($collection_name);
+    if($collection_id != -1){
+      echo "Collection name: $collection_name\n";
+      echo "Collection id: $collection_id\n";
+      $actors = get_collection_actors($collection_id);
+      if($actors != -1){
+        echo "Nombre d'acteurs: " . count($actors) . "\n";
+        foreach($actors as $actor){
+          echo $actor->name . "\n";
+        }
+      }
+    }
+    echo "\n\n";
+  }
+  echo "Done.\n\n";
+}
+
+
 $TESTS = 
 [
   "tmdb_get" => $tests_tmdb_get,
@@ -174,7 +264,11 @@ $TESTS =
   "find_details_n_lang" => $tests_find_details,
   "sort_by" => $tests_sort_by,
   "find_details_with_query" => $tests_sort_by,
-  "find_details_with_query_n_lang" => $tests_sort_by
+  "find_details_with_query_n_lang" => $tests_sort_by,
+  "get_collection_id" => $test_collections,
+  "get_movie_from_collection" => $test_collections,
+  "get_actors" => $n_tests_get_actors,
+  "get_collection_actors" => $test_collections,
 ];
 
 function TESTS($test){

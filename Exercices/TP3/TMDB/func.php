@@ -46,6 +46,7 @@ function find_details($id, $params = null) {
   }
 
   $movie_details = [
+    'id' => $id,
     'title' => $movie->title,
     'original_title' => $movie->original_title,
     'tagline' => -1,
@@ -137,10 +138,52 @@ function find_details_with_query_n_lang($query, $nmovies, $nlang){
   return $movie_details;  
 }
 
-function get_Lords_Trilogy(){
-  return find_details_with_query("The Lord of the Rings", 3, ["language" => "fr"]);
+function get_collection_id($name){
+  $tmp = tmdb_get("search/collection", ["query" => $name]);
+  if(isset($tmp->success)){
+    echo "Aucune collection trouvée pour le nom $name\n";
+    return -1;
+  }
+  if($tmp->total_results == 0){
+    echo "Aucune collection trouvée pour le nom $name\n";
+    return -1;
+  }
+  return $tmp->results[0]->id;
 }
 
-function get_Lords_Trilogy_v2(){
-  return tmdb_get("collection/119", ["language" => "fr"]);
+function get_movie_from_collection($id_collection){
+  $collection = tmdb_get('collection/' . $id_collection);
+  if(isset($collection->success)){
+    echo "Collection introuvable pour l'id $id_collection\n";
+    return -1;
+  }
+  return $collection->parts;
+}
+
+function get_actors($id){
+  $movie = tmdb_get("movie/" . $id . "/credits");
+  if(isset($movie->success)){
+    echo "Aucun acteur trouvé pour l'id $id\n";
+    return -1;
+  }
+  $actors = [];
+  foreach($movie->cast as $actor){
+    unset($actor->adult, $actor->order);
+    $actors[] = $actor;
+  }
+  return $actors;
+}
+
+
+function get_collection_actors($id_collection){
+  $movies = get_movie_from_collection($id_collection);
+  $ids = [];
+  foreach($movies as $movie){
+    $ids[] = $movie->id;
+  }
+  $actors = [];
+  foreach($ids as $id){
+    $actors = array_merge($actors, get_actors($id));
+  }
+  return $actors;
 }
