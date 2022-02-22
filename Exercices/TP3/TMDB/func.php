@@ -214,3 +214,16 @@ function get_actor_credits($id_actor){
   }
   return $actor_credits;
 }
+
+function get_actor_id($name){
+  $tmp = tmdb_get("search/person", ["query" => $name]);
+  if(isset($tmp->success)){
+    echo "Aucun acteur trouvé pour le nom $name\n";
+    return -1;
+  }
+  if($tmp->total_results == 0){
+    echo "Aucun acteur trouvé pour le nom $name\n";
+    return -1;
+  }
+  return $tmp->results[0]->id;
+}

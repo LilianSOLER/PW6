@@ -276,6 +276,33 @@ function test_get_actor_credits($tests){
   }
   echo "Done.\n\n"; 
 }
+
+$HOBBIT_ACTORS = get_collection_actors(get_collection_id("Hobbit"));
+$SHIT = ["ejdfhkq", "eqzdsfuihkj", "iohlkefzqnsdk", "euçazfsdyqikjh"];
+$test_get_actor_id = NULL;
+for($i = 0; $i < $n_tests_get_actors; $i++){
+  $test_get_actor_id[] = [$HOBBIT_ACTORS[rand(0, count($HOBBIT_ACTORS) - 1)]->name];
+}
+
+for($i = 0; $i < $n_tests_get_actors; $i++){
+  $test_get_actor_id[] = [$SHIT[rand(0, count($SHIT) - 1)]];
+}
+
+print_r($test_get_actor_id);
+
+function test_get_actor_id($tests){
+  echo "Testing get_actor_id() ...\n\n";
+
+  foreach($tests as $test){
+    $actor_id = get_actor_id($test[0]);
+    if($actor_id != -1){
+      echo "Actor name: " . $test[0] . "\n";
+      echo "Actor id: $actor_id\n";
+    }
+    echo "\n\n";
+  }
+  echo "Done.\n\n";
+}
   
 
 
@@ -293,6 +320,7 @@ $TESTS =
   "get_actors" => $n_tests_get_actors,
   "get_collection_actors" => $test_collections,
   "get_actor_credits" => $tests_find_details,
+  "get_actor_id" => $test_get_actor_id
 ];
 
 function TESTS($test){
