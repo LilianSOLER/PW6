@@ -2,8 +2,8 @@
 require_once ('func.php');
 
 $tests_tmdb_get = [
-  ["url_component" => '', "params" => NULL],
-  ["url_component" => 'movie/popular', "params" => ['language' => 'fr']],
+  ["url_component" => '', "params" => NULL], //test without any url_component
+  ["url_component" => 'movie/popular', "params" => ['language' => 'fr']], //test with all argument
   ["url_component" => 'movie/popular', "params" => ['language' => 'en']]
 ];
 
@@ -21,10 +21,10 @@ function test_tmdb_get($tests) {
   echo "Done.\n\n";
 }
 
-$LANGUAGES = ["fr", "en", "it", "de", "es", "pt", "ja", "ko", "zh"];
+$LANGUAGES = ["fr", "en", "it", "de", "es", "pt", "ja", "ko", "zh"]; //TODO: add more languages
 $tests_find_details = NULL;
 for($i = 0; $i < 10; $i++){
-  $tests_find_details[] = [
+  $tests_find_details[] = [ //test with random movie id and random language
     "id" => rand(1, 1000), 
     "params" => ['language' => $LANGUAGES[rand(0, count($LANGUAGES) - 1)]]
   ];
@@ -41,13 +41,17 @@ function test_find_details($tests) {
     $movie_details = find_details($id, $param);
     if($movie_details != -1){
       display_details($movie_details);
-    } 
+    }
+    else{
+      echo "Movie not found.\n";
+    }
     echo "\n";
   }
 
   echo "Done.\n\n";
 }
 
+//display details of a movie
 function display_details($details){
   if(!isset($details['title'])){return ;}
   echo "Title: " . $details['title'] . "\n";
@@ -88,14 +92,14 @@ function test_find_details_n_lang($tests, $n = 3){
   echo "Done.\n\n";
 }
 
-$CRITERIAS = ["id", "original_title", "title", "popularity", "vote_average", "vote_count"];
-$QUERY = ["Lord of The Rings", "Matrix", "Star Wars", "Harry Potter", "The Godfather", "The Shawshank Redemption", "The Godfather II", "The Dark Knight", "ihfuqdhsiu", "uhefSIDUQHLKUH", "IGUEZZFQISDGKI"];
+$CRITERIAS = ["id", "original_title", "title", "popularity", "vote_average", "vote_count"]; //all possible criterias
+$QUERY = ["Lord of The Rings", "Matrix", "Star Wars", "Harry Potter", "The Godfather", "The Shawshank Redemption", "The Godfather II", "The Dark Knight", "ihfuqdhsiu", "uhefSIDUQHLKUH", "IGUEZZFQISDGKI"]; //different queries, true titles and false titles
 
 $tests_sort_by = NULL;
 for($i = 0; $i < 10; $i++){
   $query = $QUERY[rand(0, count($QUERY) - 1)];
   $movies = tmdb_get("search/movie", ["query" => $query])->results;
-  $tests_sort_by[] = [
+  $tests_sort_by[] = [ //test with random query and random criterias
     "query" => $query,
     "movies" => $movies,
     "criteria" => $CRITERIAS[rand(0, count($CRITERIAS) - 1)]
@@ -170,11 +174,11 @@ function test_find_details_with_query_n_lang($tests){
   echo "Done.\n\n";
 }
 
-$COLLECTIONS_NAME = ["Avengers", "Star Wars", "Harry Potter", "Lord of The Rings", "The Godfather", "The Shawshank Redemption", "The Godfather", "Batman", "Matrix", "Terminator", "fdsqihxcgkl", "uhefSIDUQHLKUH", "IGUEZZFQISDGKI"];
+$COLLECTIONS_NAME = ["Avengers", "Star Wars", "Harry Potter", "Lord of The Rings", "The Godfather", "The Shawshank Redemption", "The Godfather", "Batman", "Matrix", "Terminator", "fdsqihxcgkl", "uhefSIDUQHLKUH", "IGUEZZFQISDGKI"]; //different collections names, true names and false names
 $test_collections = NULL;
 for($i = 0; $i < 10; $i++){
   $name = $COLLECTIONS_NAME[rand(0, count($COLLECTIONS_NAME) - 1)];
-  $test_collections[] = [
+  $test_collections[] = [ //test with random collection name
     "name" => $name,
   ];
 }
@@ -217,7 +221,7 @@ function test_get_movie_from_collection($tests){
   echo "Done.\n\n";
 }
 
-$n_tests_get_actors = rand(3, 10);
+$n_tests_get_actors = rand(3, 10); //random number of tests
 
 function test_get_actors($n_tests){
   echo "Testing get_actors() ...\n\n";
@@ -277,18 +281,16 @@ function test_get_actor_credits($tests){
   echo "Done.\n\n"; 
 }
 
-$HOBBIT_ACTORS = get_collection_actors(get_collection_id("Hobbit"));
-$SHIT = ["ejdfhkq", "eqzdsfuihkj", "iohlkefzqnsdk", "euçazfsdyqikjh"];
+$HOBBIT_ACTORS = get_collection_actors(get_collection_id("Hobbit")); //get actors of Hobbit collection
+$SHIT = ["ejdfhkq", "eqzdsfuihkj", "iohlkefzqnsdk", "euçazfsdyqikjh"]; //false actors name
 $test_get_actor_id = NULL;
 for($i = 0; $i < $n_tests_get_actors; $i++){
-  $test_get_actor_id[] = [$HOBBIT_ACTORS[rand(0, count($HOBBIT_ACTORS) - 1)]->name];
+  $test_get_actor_id[] = [$HOBBIT_ACTORS[rand(0, count($HOBBIT_ACTORS) - 1)]->name]; //random actor from Hobbit collection
 }
 
 for($i = 0; $i < $n_tests_get_actors; $i++){
-  $test_get_actor_id[] = [$SHIT[rand(0, count($SHIT) - 1)]];
+  $test_get_actor_id[] = [$SHIT[rand(0, count($SHIT) - 1)]]; //random false actor name
 }
-
-print_r($test_get_actor_id);
 
 function test_get_actor_id($tests){
   echo "Testing get_actor_id() ...\n\n";
@@ -306,7 +308,7 @@ function test_get_actor_id($tests){
   
 
 
-
+//different tests and his tests array
 $TESTS = 
 [
   "tmdb_get" => $tests_tmdb_get,
@@ -323,10 +325,11 @@ $TESTS =
   "get_actor_id" => $test_get_actor_id
 ];
 
+//run tests with different functions and different tests
 function TESTS($test){
   global $TESTS;
-  $tests = $TESTS[$test];
-  $function = "test_" . $test;
-  $function($tests);
+  $tests = $TESTS[$test]; //get tests array
+  $function = "test_" . $test; //get function name
+  $function($tests); //run function
 }
 
