@@ -260,6 +260,26 @@ function test_get_collection_actors($tests){
 }
 
 
+function test_get_actor_credits($tests){
+  echo "Testing get_actor_credits() ...\n\n";
+
+  foreach($tests as $test){
+    $actor_credits = get_actor_credits($test['id']);
+    if($actor_credits != -1){
+      echo "Actor id: " . $test['id'] . "\n";
+      echo "Nombre de films: " . count($actor_credits) . "\n";
+      foreach($actor_credits as $actor_credit){
+        echo $actor_credit["movie_title"] . " as " . $actor_credit["character"] . "\n";
+      }
+    }
+    echo "\n\n";
+  }
+  echo "Done.\n\n"; 
+}
+  
+
+
+
 $TESTS = 
 [
   "tmdb_get" => $tests_tmdb_get,
@@ -272,6 +292,7 @@ $TESTS =
   "get_movie_from_collection" => $test_collections,
   "get_actors" => $n_tests_get_actors,
   "get_collection_actors" => $test_collections,
+  "get_actor_credits" => $tests_find_details,
 ];
 
 function TESTS($test){

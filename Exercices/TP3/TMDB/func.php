@@ -194,3 +194,23 @@ function get_collection_actors($id_collection){
   return $actors;
 }
 
+function get_actor_credits($id_actor){
+  $actor = tmdb_get("person/" . $id_actor . "/movie_credits");
+  if(isset($actor->success)){
+    echo "Acteur introuvable pour l'id $id_actor\n";
+    return -1;
+  }
+  $actor_credits = [];
+  foreach($actor->cast as $actor_movie){
+    $actor_credits[] = [
+      "character" => $actor_movie->character,
+      "movie_id" => $actor_movie->id,
+      "movie_title" => $actor_movie->title
+    ];
+  }
+  if(count($actor_credits) == 0){
+    echo "Aucun film trouvé pour l'acteur $id_actor\n";
+    return -1;
+  }
+  return $actor_credits;
+}
