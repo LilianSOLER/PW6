@@ -44,3 +44,18 @@ function date_to_mktime($date){
     return -1;
   }  
 }
+
+function sort_podcasts_by_mktime($podcasts){
+  if($podcasts == NULL || count($podcasts) == 1){
+    return -1;
+  }
+  $mktime = [];
+  foreach($podcasts as $podcast){
+    if($podcast == -1){
+      $mktime[] = -1;
+    }
+    $mktime[] = $podcast['pubDate'];
+  }
+  array_multisort($mktime, SORT_ASC, $podcasts);
+  return $podcasts;  
+}

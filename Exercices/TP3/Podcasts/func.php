@@ -13,9 +13,9 @@ function get_podcasts($url) {
     foreach ($feed->item as $item) {
         $podcasts[] = [
           "pubDate" => date_to_mktime($item->pubDate),
-          "title" => $item->title,
-          "duration" => $item->itunes->duration,
-          "media" => $item->enclosure->url
+          "title" => (string) $item->title[0],
+          "duration" => explode(" ", $item->description)[2],
+          "media" => (string) $item->enclosure["url"],
         ];
     }
     return $podcasts;

@@ -7,4 +7,5 @@ require_once('test.php');
 // TESTS("month_str_to_int");
 //TESTS("date_to_mktime");
 
-TESTS('slice_podcast_by');
+// TESTS('slice_podcast_by');
+TESTS('sort_podcasts_by_mktime');

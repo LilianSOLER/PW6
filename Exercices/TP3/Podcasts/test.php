@@ -131,6 +131,38 @@ function test_slice_podcast_by($tests){
   }
   echo "Done.\n\n";
 }
+$test_sort_podcasts_by_mktime = NULL;
+$test_sort_podcasts_by_mktime[] = get_podcasts($Meth_Sci);
+for($i = 0; $i < rand(3, 8); $i++){
+  for($j = 0; $j < rand(1, 5); $j++){
+    array_push($test_sort_podcasts_by_mktime, get_podcasts($RSS_PODCAST_URL[rand(0, count($RSS_PODCAST_URL) - 1)]));
+    // $test_sort_podcasts_by_mktime[] = get_podcasts($RSS_PODCAST_URL[rand(0, count($RSS_PODCAST_URL) - 1)]);
+  }
+}
+while(!shuffle($test_sort_podcasts_by_mktime)){}
+
+function test_sort_podcasts_by_mktime($tests){
+  echo "Test sort_mktime_array() ...\n\n";
+  foreach($tests as $podcasts){
+    if($podcasts != -1){
+      $podcasts_sorted = sort_podcasts_by_mktime($podcasts);
+      if($podcasts_sorted != -1){
+        echo "Nombre de podcasts: " . count($podcasts_sorted) . "\n";
+        foreach($podcasts_sorted as $podcast){
+          echo date('Y-m-d', $podcast["pubDate"]) . "\n";
+        }
+      }else{
+          echo "Podcast cant be sorted";
+      }
+    }else{
+      echo "Podcast not found";
+    }
+    echo "\n\n";
+  }
+  
+  echo "Done.\n\n";
+}
+
 
 $TESTS = [
   "get_podcasts" => $RSS_PODCAST_URL,
@@ -138,6 +170,7 @@ $TESTS = [
   "month_str_to_int" => $test_month_str_to_int,
   "date_to_mktime" => $DATES,
   "slice_podcast_by" => $test_slice_podcast_by,
+  "sort_podcasts_by_mktime" => $test_sort_podcasts_by_mktime
 ];
 
 //run tests with different functions and different tests
