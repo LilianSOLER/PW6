@@ -46,3 +46,18 @@ function slice_podcast_by($podcasts, $slice_by) {
     }
   return $podcast_sliced;
 }
+
+function dl_n_last_podcasts($podcasts, $n) {
+  if($podcasts == -1 || $podcasts == NULL || $n == NULL || $n < 0){
+    return -1;
+  }
+  $podcasts = sort_podcasts_by_mktime($podcasts);
+  $podcasts_dl = array_slice($podcasts, -$n);
+  foreach($podcasts_dl as $podcast){
+    $file_name = rtrim(implode("_", explode(" ", $podcast['title'])));
+    $file_name .= ".mp3";
+    $url_dl = $podcast['media'];
+    exec("wget -b -O ./media/mp3/". $file_name . " " . $url_dl);
+  }
+  return 1;
+}
