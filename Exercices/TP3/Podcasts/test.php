@@ -2,8 +2,12 @@
 require_once('func.php');
 require_once('date_func.php');
 
-$Meth_Sci = "http://radiofrance-podcast.net/podcast09/rss_14312.xml";
-$RSS_PODCAST_URL = [$Meth_Sci];
+$METH_SCI = 
+[
+  "url" => "https://radiofrance-podcast.net/podcast09/d4463877-caa3-4507-9399-f5eb00fde027/rss_14312.xml"
+]
+;
+$RSS_PODCAST_URL = [$METH_SCI['url']];
 for($i = 0; $i < 10; $i++) {
     $RSS_PODCAST_URL[] = "http://radiofrance-podcast.net/podcast09/rss_143" . rand(10, 99) . ".xml";
 }
@@ -11,7 +15,6 @@ for($i = 0; $i < 10; $i++) {
 
 function test_get_podcasts($tests){
   echo "Test get_podcast() ...\n\n";
-
   foreach($tests as $test){
     $url = $test;
     $podcasts = get_podcasts($url);
@@ -20,7 +23,7 @@ function test_get_podcasts($tests){
       echo "Nombre de podcasts: " . count($podcasts) . "\n";
       foreach($podcasts as $podcast){
         echo $podcast['title'] . "\n";
-      }
+        }
     }else{
       echo "Podcast not found";
     }
@@ -28,6 +31,8 @@ function test_get_podcasts($tests){
   }
   echo "Done.\n\n";
 }
+
+$METH_SCI["podcasts"] = get_podcasts($METH_SCI['url']);
 
 $UTC = [];
 $SIGN = ["+", "-"];
@@ -100,7 +105,7 @@ function test_date_to_mktime($tests){
 
 $test_slice_podcast_by = 
 [
-  "podcasts" => get_podcasts($Meth_Sci),
+  "podcasts" => $METH_SCI["podcasts"],
   "slice_by" => ["week", "month", "year", "no"]
 ];
 
@@ -131,8 +136,11 @@ function test_slice_podcast_by($tests){
   }
   echo "Done.\n\n";
 }
+
+$METH_SCI["slice_by_week"] = slice_podcast_by($METH_SCI["podcasts"], "week");
+
 $test_sort_podcasts_by_mktime = NULL;
-$test_sort_podcasts_by_mktime[] = get_podcasts($Meth_Sci);
+$test_sort_podcasts_by_mktime[] = $METH_SCI['podcasts'];
 for($i = 0; $i < rand(3, 8); $i++){
   for($j = 0; $j < rand(1, 5); $j++){
     array_push($test_sort_podcasts_by_mktime, get_podcasts($RSS_PODCAST_URL[rand(0, count($RSS_PODCAST_URL) - 1)]));
@@ -162,6 +170,8 @@ function test_sort_podcasts_by_mktime($tests){
   
   echo "Done.\n\n";
 }
+
+$METH_SCI["sorted_podcasts"] = sort_podcasts_by_mktime($METH_SCI["podcasts"]);
 
 
 $TESTS = [
