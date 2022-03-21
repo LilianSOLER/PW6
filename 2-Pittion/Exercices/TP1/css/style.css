@@ -1,0 +1,50 @@
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+html,
+body {
+	height: 100%;
+}
+body {
+	margin: 0;
+	overflow-y: hidden;
+}
+
+div {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid black;
+	height: 100%;
+}
+
+header,
+footer {
+	background-color: blue;
+}
+
+aside {
+	background-color: red;
+	width: 150px;
+}
+
+header,
+aside,
+main,
+footer {
+	padding: 10px;
+	color: white;
+}
+
+main {
+	background-color: green;
+	width: 100%;
+}
+
+footer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}

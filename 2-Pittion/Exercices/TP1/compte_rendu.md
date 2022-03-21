@@ -111,3 +111,11 @@
   23. flex-direction: column-reverse; align-content: center;
   24. flex-flow:column-reverse wrap-reverse; justify-content:center; align-content:space-between;
 
+## 3 - Exercice :
+- background-color: blue/green/red => change la couleur du fond
+- width: 150px => fixe la largeur à 150px
+- padding: 10px => ajoute une marge intérieure de 10px
+- display: flex; justify-content: space-between; => place les 3 élements en ligne avec de l'esapce entre eux
+- position: absolute; bottom: 0; left: 0; right: 0; => place le footer en bas de la page
+- overflow-y: hidden; => empêche le scroll vertical
+
