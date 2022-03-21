@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Calendrier - agenda web (niv. 3)</title>
+	<meta name="author" content="SOLER Lilian">
+	<meta name="viewport" content="width=device-width; initial-scale=1.0">
+	<link rel="stylesheet" href="theme.css">
+</head>
+<body>
+	<h1>Calendrier - agenda web (niv. 3)</h1>
+	<hr>
+  <form action="agenda.php" method="get">
+    <p>
+      <label for="month">Mois : </label>
+      <input type="number" name="month" id="month" min="1" max="12" step="1">
+    </p>
+    <p>
+      <label for="year">Année : </label>
+      <input type="number" name="year" id="year" min="1900" max="2200" step="1">
+    </p>
+    <p>
+      <label for="format">Format : </label>
+      <select name="format" id="format">
+        <option value="">--Please choose an option--</option>
+        <option value="3">Par jour</option>
+        <option value="7"> Par semaine</option>
+      </select>
+    </p>
+    <input type="submit" value="Afficher">
+  </form>
+  <p><span title="message d'aide">support</span></p>
+  <form action="agenda.php" method="get">
+    <p>
+      <label for="ndays">Jour : </label>
+      <input type="number" name="ndays" id="ndays" min="1" max="31" step="1" required>
+    </p>
+    <p>
+      <label for="event">Mois : </label>
+      <input type="text" name="event" id="event" required>
+    </p>
+    <input type="submit" value="Modifier">
+  </form>
+</body>
+
+</html>
