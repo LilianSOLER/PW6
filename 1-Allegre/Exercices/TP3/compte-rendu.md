@@ -2,12 +2,15 @@
 
 # Compte-rendu de TP
 
-Sujet choisi : 
-
 ## Participants 
 
-* Un
-* Deux
-* ...
+* SOLER Lilian
+
+## TMDB
+
+1. Exploration :
+  - Format de réponse : JSON
+  - Film : Fight Club
+8. Oui, avec get_collection_actors(get_collection_id("Hobbit"))
 
 

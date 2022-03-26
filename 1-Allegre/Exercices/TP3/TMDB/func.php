@@ -1,6 +1,7 @@
 <?php
 require_once ('config.php');//to get the api key
 
+$LANGUAGES = ["fr", "en", "it", "de", "es", "pt", "ja", "ko", "zh"]; //TODO: add more languages
 $api_prefix = 'http://api.themoviedb.org/3/';  //3rd API version
 
 /**
