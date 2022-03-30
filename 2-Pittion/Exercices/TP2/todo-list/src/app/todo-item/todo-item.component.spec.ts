@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TodoItem } from '../interfaces/todo-item';
 
 import { TodoItemComponent } from './todo-item.component';
 
