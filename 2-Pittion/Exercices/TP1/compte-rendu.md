@@ -112,10 +112,36 @@
   24. flex-flow:column-reverse wrap-reverse; justify-content:center; align-content:space-between;
 
 ## 3 - Exercice :
-- background-color: blue/green/red => change la couleur du fond
-- width: 150px => fixe la largeur à 150px
-- padding: 10px => ajoute une marge intérieure de 10px
-- display: flex; justify-content: space-between; => place les 3 élements en ligne avec de l'esapce entre eux
-- position: absolute; bottom: 0; left: 0; right: 0; => place le footer en bas de la page
-- overflow-y: hidden; => empêche le scroll vertical
+
+## 4 - Grid Garden :
+- https://cssgridgarden.com/#fr
+- Solution: 
+  1. grid-column-start: 3
+  2. grid-column-start: 5
+  3. grid-column-end: 4
+  4. grid-column-end: 2
+  5. grid-column-end: 5
+  6. grid-column-start: 4
+  7. grid-column-end: span 2
+  8. grid-column-end: span 5
+  9. grid-column-start: span 3
+  10. grid-column: 4/6
+  11. grid-column: span 3 / 5
+  12. grid-row-start: 3
+  13. grid-row: 3/6
+  14. grid-row: 5; grid-column: 2;
+  15. grid-row: 1/6; grid-column: 2/6;
+  16. grid-area: 1/2 / 4/6
+  17. grid-area: 2/3 / 5/6
+  18. order: 6
+  19. order: -1
+  20. grid-template-columns: 50% 25% 25%
+  21. grid-template-columns: repeat(8, 12.5%)
+  22. grid-template-columns: 100px 3em 40%
+  23. grid-template-columns: 1fr 5fr
+  24. grid-template-columns: 50px 1fr 1fr 1fr 50px
+  25. grid-template-columns: 75px 3fr 2fr
+  26. grid-template-rows: 50px 0 0 0 
+  27. grid-template: 60% / 200px
+  28. grid-template: 1fr 50px / 1fr 4fr
 
