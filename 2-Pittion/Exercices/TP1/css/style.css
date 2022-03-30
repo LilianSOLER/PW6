@@ -12,20 +12,35 @@ body {
 	overflow-y: hidden;
 }
 
+:root {
+	--desktop-color: white;
+	--desktop-header-footer-bg-color: blue;
+	--desktop-aside-bg-color: red;
+	--desktop-main-bg-color: green;
+	--desktop-padding: 20px;
+
+	--smartphone-color: black;
+	--smartphone-header-footer-bg-color: orange;
+	--smartphone-aside-bg-color: pink;
+	--smartphone-main-bg-color: green;
+	--smartphone-padding: 10px;
+}
+
 div {
 	display: flex;
 	justify-content: space-between;
 	border: 1px solid black;
-	height: 100%;
+	height: 90vh;
 }
 
 header,
 footer {
-	background-color: blue;
+	background-color: var(--desktop-header-footer-bg-color);
+	height: 5vh;
 }
 
 aside {
-	background-color: red;
+	background-color: var(--desktop-aside-bg-color);
 	width: 150px;
 }
 
@@ -33,18 +48,48 @@ header,
 aside,
 main,
 footer {
-	padding: 10px;
-	color: white;
+	padding: var(--desktop-padding);
+	color: var(--desktop-color);
 }
 
 main {
-	background-color: green;
+	background-color: var(--desktop-main-bg-color);
 	width: 100%;
+	overflow-y: scroll;
 }
 
-footer {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	right: 0;
+@media (max-width: 640px) {
+	header,
+	aside,
+	main,
+	footer {
+		padding: var(--smartphone-padding);
+		color: var(--smartphone-color);
+	}
+
+	main {
+		background-color: var(--smartphone-main-bg-color);
+	}
+
+	aside {
+		background-color: var(--smartphone-aside-bg-color);
+	}
+
+	header,
+	footer {
+		background-color: var(--smartphone-header-footer-bg-color);
+	}
+
+	div {
+		display: block;
+	}
+
+	aside {
+		width: 100%;
+		height: 5vh;
+	}
+
+	main {
+		height: 80vh;
+	}
 }
