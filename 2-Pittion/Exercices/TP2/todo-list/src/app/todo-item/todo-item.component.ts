@@ -3,7 +3,9 @@ import { TodoItem } from '../interfaces/todo-item';
 
 @Component({
   selector: 'app-todo-item',
-  template: ` {{ item.title }} `,
+  template: `<div class="todo-item">
+    {{ item.title }}
+  </div>`,
   styleUrls: ['./todo-item.component.scss'],
 })
 export class TodoItemComponent implements OnInit {
