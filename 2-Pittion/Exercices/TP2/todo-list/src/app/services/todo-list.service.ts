@@ -46,4 +46,9 @@ export class TodoListService {
   getTodoList(): TodoItem[] {
     return this.todoList;
   }
+  
+  resetTodoList(): void {
+    this.todoList = defaultTodoList;
+    this.saveList();
+  }
 }

@@ -15,6 +15,7 @@ import { TodoItem } from '../interfaces/todo-item';
         <span
           class="todo-title"
           [ngClass]="{ 'todo-complete': item.completed }"
+          (dblclick)="editItem()"
         >
           {{ item.title }}
         </span>
@@ -28,6 +29,7 @@ export class TodoItemComponent implements OnInit {
   @Input() item: TodoItem;
   @Output() remove: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
   @Output() update: EventEmitter<any> = new EventEmitter<any>();
+  @Output() edit: EventEmitter<TodoItem> = new EventEmitter<TodoItem>();
 
   constructor() {}
 
@@ -42,5 +44,15 @@ export class TodoItemComponent implements OnInit {
       item: this.item,
       changes: { completed: !this.item.completed },
     });
+  }
+
+  editItem(): void {
+    const title = prompt('Edit item', this.item.title);
+    if (title) {
+      this.update.emit({
+        item: this.item,
+        changes: { title },
+      });
+    }
   }
 }
