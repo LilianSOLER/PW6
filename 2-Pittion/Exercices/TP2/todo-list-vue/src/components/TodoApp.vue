@@ -1,26 +1,103 @@
 <template>
-  <div class="container">
-    <h2>{{ title }}</h2>
-  </div>
+	<div class="container">
+		<h2>{{ title }}</h2>
+
+		<div class="flex">
+			<input type="text" placeholder="Enter task" class="form-input" />
+			<button class="btn-submit">SUBMIT</button>
+		</div>
+
+		<table class="task-table">
+			<thead>
+				<tr>
+					<th>Task</th>
+					<th>Status</th>
+					<th>#</th>
+					<th>#</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Finish this todo-app</td>
+					<td>In-progress</td>
+					<td>
+						<div><span class="fa fa-pen"></span></div>
+					</td>
+					<td><div><span class="fa fa-trash"></span></div></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </template>
 
 <script>
 export default {
-  title: '',
-  props: {
-    title: String
-  }
-}
+	title: "",
+	props: {
+		title: String,
+	},
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+template {
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+}
+
 .container {
-  margin: 0 auto;
-  max-width: 600px;
+	margin: 0 auto;
+	width: 80vw;
+	min-width: 400px;
 }
 
 .container h2 {
-  text-align: center;
+	text-align: center;
+}
+
+.flex {
+	width: 100%;
+	min-width: 300px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.flex input[type="text"] {
+	height: 1vh;
+	padding: 0.5vh 2vw 0.5vh 2vw;
+}
+
+.btn-submit {
+	height: 2.5vh;
+	padding: 0.25vh 2vw;
+	color: #000;
+	background-color: #ffc107;
+	border-color: #ffc107;
+	border-radius: 0;
+}
+
+.task-table {
+	max-width: 600px;
+	width: 60vw;
+	min-width: 300px;
+	margin: 5vh auto;
+	border-collapse: collapse;
+}
+
+.task-table th, .task-table td {
+	text-align: left;
+	padding: 0.5vh 2vw;
+	background-color: #ffc107;
+	color: #000;
+}
+
+.task-table td {
+	background-color: white;
+	border-bottom: 1px solid #000;
 }
 </style>
