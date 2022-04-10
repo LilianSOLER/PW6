@@ -3,8 +3,8 @@
 		<h2>{{ title }}</h2>
 
 		<div class="flex">
-			<input type="text" placeholder="Enter task" class="form-input" />
-			<button class="btn-submit">SUBMIT</button>
+			<input v-model="newTask" type="text" placeholder="Enter task" class="form-input" />
+			<button @click="submitTask" class="btn-submit">SUBMIT</button>
 		</div>
 
 		<table class="task-table">
@@ -38,6 +38,7 @@ export default {
 	},
 	data() {
 		return {
+			newTask: "",
 			tasks: [
 				{
 					name: "Finish this todo-app",
@@ -50,6 +51,15 @@ export default {
 			],
 		}
 	},
+	methods: {
+		submitTask() {
+			this.tasks.push({
+				name: this.newTask,
+				status: "To-do",
+			});
+			this.newTask = "";
+		}
+	}
 };
 </script>
 
