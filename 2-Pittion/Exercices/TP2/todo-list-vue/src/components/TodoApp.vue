@@ -10,17 +10,17 @@
 		<table class="task-table">
 			<thead>
 				<tr>
-					<th>Task</th>
-					<th>Status</th>
-					<th>#</th>
-					<th>#</th>
+					<th class="text-td" >Task</th>
+					<th class="text-td">Status</th>
+					<th class="icon-td">#</th>
+					<th class="icon-td">#</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr v-for="(task, index) in tasks" :key="index">
-					<td>{{ task.name }}</td>
-					<td>{{ task.status }}</td>
-					<td>
+					<td class="text-td">{{ task.name }}</td>
+					<td class="text-td" ><span @click="changeStatus(index)" class="cursor">{{ firstCharUpper(task.status) }}</span></td>
+					<td class="icon-td">
 						<div @click="editTask(index)"><span class="fa fa-pen"></span></div>
 					</td>
 					<td><div @click="deleteTask(index)"><span class="fa fa-trash"></span></div></td>
@@ -40,14 +40,15 @@ export default {
 		return {
 			newTask: "",
 			editedTask: null,
+			availableStatues: ["to-do", "in-progress", "done"],
 			tasks: [
 				{
 					name: "Finish this todo-app",
-					status: "In-progress",
+					status: "in-progress",
 				},
 				{
 					name: "Eat some food",
-					status: "To-do",
+					status: "to-do",
 				}
 			],
 		}
@@ -73,6 +74,12 @@ export default {
 		editTask(index) {
 			this.newTask = this.tasks[index].name;
 			this.editedTask = index;
+		},
+		changeStatus(index) {
+			this.tasks[index].status = this.availableStatues[(this.availableStatues.indexOf(this.tasks[index].status) + 1) % this.availableStatues.length];
+		},
+		firstCharUpper(str) {
+			return str.charAt(0).toUpperCase() + str.slice(1);
 		}
 	}
 };
@@ -97,7 +104,7 @@ template {
 }
 
 .flex {
-	width: 100%;
+	width: 60vw;
 	min-width: 300px;
 	margin: 0 auto;
 	display: flex;
@@ -121,9 +128,9 @@ template {
 }
 
 .task-table {
-	max-width: 600px;
+	max-width: 800px;
 	width: 60vw;
-	min-width: 300px;
+	min-width: 400px;
 	margin: 5vh auto;
 	border-collapse: collapse;
 }
@@ -139,4 +146,18 @@ template {
 	background-color: white;
 	border-bottom: 1px solid #000;
 }
+
+.cursor{
+	cursor: pointer;
+}
+
+.text-td {
+	min-width: 15vw;
+	width: auto;
+}
+
+.icon-td {
+	width: 5vw;
+}
+
 </style>
