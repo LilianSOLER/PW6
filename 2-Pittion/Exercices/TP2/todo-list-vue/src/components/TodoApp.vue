@@ -18,7 +18,7 @@
 			</thead>
 			<tbody>
 				<tr v-for="(task, index) in tasks" :key="index">
-					<td class="text-td">{{ task.name }}</td>
+					<td class="text-td"><span :class="{'finished': task.status === lastStatus() }">{{ task.name }}</span></td>
 					<td class="text-td" ><span @click="changeStatus(index)" class="cursor">{{ firstCharUpper(task.status) }}</span></td>
 					<td class="icon-td">
 						<div @click="editTask(index)"><span class="fa fa-pen"></span></div>
@@ -80,6 +80,9 @@ export default {
 		},
 		firstCharUpper(str) {
 			return str.charAt(0).toUpperCase() + str.slice(1);
+		},
+		lastStatus() {
+			return this.availableStatues[this.availableStatues.length - 1];
 		}
 	}
 };
@@ -158,6 +161,10 @@ template {
 
 .icon-td {
 	width: 5vw;
+}
+
+.finished {
+	text-decoration: line-through;
 }
 
 </style>
