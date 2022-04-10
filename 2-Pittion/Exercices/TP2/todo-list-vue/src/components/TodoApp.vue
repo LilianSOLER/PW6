@@ -17,9 +17,9 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>Finish this todo-app</td>
-					<td>In-progress</td>
+				<tr v-for="(task, index) in tasks" :key="index">
+					<td>{{ task.name }}</td>
+					<td>{{ task.status }}</td>
 					<td>
 						<div><span class="fa fa-pen"></span></div>
 					</td>
@@ -35,6 +35,20 @@ export default {
 	title: "",
 	props: {
 		title: String,
+	},
+	data() {
+		return {
+			tasks: [
+				{
+					name: "Finish this todo-app",
+					status: "In-progress",
+				},
+				{
+					name: "Eat some food",
+					status: "To-do",
+				}
+			],
+		}
 	},
 };
 </script>
