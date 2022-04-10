@@ -23,7 +23,7 @@
 					<td>
 						<div><span class="fa fa-pen"></span></div>
 					</td>
-					<td><div><span class="fa fa-trash"></span></div></td>
+					<td><div @click="deleteTask(index)"><span class="fa fa-trash"></span></div></td>
 				</tr>
 			</tbody>
 		</table>
@@ -53,11 +53,16 @@ export default {
 	},
 	methods: {
 		submitTask() {
-			this.tasks.push({
-				name: this.newTask,
-				status: "To-do",
-			});
-			this.newTask = "";
+			if(this.newTask.length > 0) {
+				this.tasks.push({
+					name: this.newTask,
+					status: "To-do",
+				});
+				this.newTask = "";
+			}
+		},
+		deleteTask(index) {
+			this.tasks.splice(index, 1);
 		}
 	}
 };
