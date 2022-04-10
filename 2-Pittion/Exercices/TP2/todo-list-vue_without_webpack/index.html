@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="index.css" />
+		<title>Todo App VueJs</title>
+	</head>
+	<body>
+		<div class="app">
+			<div class="container">
+				<h2>{{ title }}</h2>
+
+				<div class="flex">
+					<input
+						@keyup.enter="submitTask"
+						v-model="newTask"
+						type="text"
+						placeholder="Enter task"
+						class="form-input"
+					/>
+					<button @click="submitTask" class="btn-submit">SUBMIT</button>
+				</div>
+
+				<table class="task-table">
+					<thead>
+						<tr>
+							<th class="text-td">Task</th>
+							<th class="text-td">Status</th>
+							<th class="icon-td">#</th>
+							<th class="icon-td">#</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr v-for="(task, index) in tasks" :key="index">
+							<td class="text-td">
+								<span :class="{'finished': task.status === lastStatus() }"
+									>{{ task.name }}</span
+								>
+							</td>
+							<td
+								:class="{'text-danger': task.status === 'to-do','text-warning': task.status === 'in-progress' , 'text-sucess': task.status === 'done'}"
+							>
+								<span @click="changeStatus(index)" class="cursor"
+									>{{ firstCharUpper(task.status) }}</span
+								>
+							</td>
+							<td class="icon-td">
+								<div @click="editTask(index)">
+									<span class="fa fa-pen"></span>
+								</div>
+							</td>
+							<td>
+								<div @click="deleteTask(index)">
+									<span class="fa fa-trash"></span>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<script src="https://unpkg.com/vue@3"></script>
+		<script src="./app.js"></script>
+    <script src="https://kit.fontawesome.com/8e3c581117.js" crossorigin="anonymous"></script>
+	</body>
+</html>
