@@ -3,7 +3,7 @@
 		<h2>{{ title }}</h2>
 
 		<div class="flex">
-			<input v-model="newTask" type="text" placeholder="Enter task" class="form-input" />
+			<input @keyup.enter="submitTask" v-model="newTask" type="text" placeholder="Enter task" class="form-input" />
 			<button @click="submitTask" class="btn-submit">SUBMIT</button>
 		</div>
 
@@ -21,7 +21,7 @@
 					<td>{{ task.name }}</td>
 					<td>{{ task.status }}</td>
 					<td>
-						<div><span class="fa fa-pen"></span></div>
+						<div @click="editTask(index)"><span class="fa fa-pen"></span></div>
 					</td>
 					<td><div @click="deleteTask(index)"><span class="fa fa-trash"></span></div></td>
 				</tr>
@@ -39,6 +39,7 @@ export default {
 	data() {
 		return {
 			newTask: "",
+			editedTask: null,
 			tasks: [
 				{
 					name: "Finish this todo-app",
@@ -54,15 +55,24 @@ export default {
 	methods: {
 		submitTask() {
 			if(this.newTask.length > 0) {
-				this.tasks.push({
-					name: this.newTask,
-					status: "To-do",
-				});
+				if(this.editedTask !== null) {
+					this.tasks[this.editedTask].name = this.newTask;
+					this.editedTask = null;
+				} else {
+					this.tasks.push({
+						name: this.newTask,
+						status: "To-do",
+					});
+				}
 				this.newTask = "";
 			}
 		},
 		deleteTask(index) {
 			this.tasks.splice(index, 1);
+		},
+		editTask(index) {
+			this.newTask = this.tasks[index].name;
+			this.editedTask = index;
 		}
 	}
 };
