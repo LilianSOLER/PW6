@@ -19,7 +19,8 @@
 			<tbody>
 				<tr v-for="(task, index) in tasks" :key="index">
 					<td class="text-td"><span :class="{'finished': task.status === lastStatus() }">{{ task.name }}</span></td>
-					<td class="text-td" ><span @click="changeStatus(index)" class="cursor">{{ firstCharUpper(task.status) }}</span></td>
+					<td :class="{'text-danger': task.status === 'to-do','text-warning': task.status === 'in-progress' , 'text-sucess': task.status === 'done'}" >
+						<span @click="changeStatus(index)" class="cursor">{{ firstCharUpper(task.status) }}</span></td>
 					<td class="icon-td">
 						<div @click="editTask(index)"><span class="fa fa-pen"></span></div>
 					</td>
@@ -142,7 +143,6 @@ template {
 	text-align: left;
 	padding: 0.5vh 2vw;
 	background-color: #ffc107;
-	color: #000;
 }
 
 .task-table td {
@@ -165,6 +165,18 @@ template {
 
 .finished {
 	text-decoration: line-through;
+}
+
+.text-danger {
+	color: #dc3545;
+}
+
+.text-warning {
+	color: #ffc107;
+}
+
+.text-sucess {
+	color: #28a745;
 }
 
 </style>
