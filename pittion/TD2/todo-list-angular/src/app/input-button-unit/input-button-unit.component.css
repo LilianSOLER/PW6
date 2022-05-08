@@ -1,0 +1,24 @@
+.todo-input {
+  padding: 4px 10px 4px;
+  font-size: 16px;
+  font-family: "Lucida Grande", Verdana, sans-serif;
+  line-height: 20px;
+  border: solid 1px #dddddd;
+  border-radius: 5px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+:host(:not([hidden])) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+/*# sourceMappingURL=input-button-unit.component.css.map */
